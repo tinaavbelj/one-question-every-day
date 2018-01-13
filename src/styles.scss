@@ -1,0 +1,67 @@
+@import './variables.scss';
+
+* {
+    box-sizing: border-box;
+    font-family : Avenir-Demi;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button {
+    padding: 10px;
+    outline: none;
+    color: $orange;
+    background-color: transparent;
+    font-size: 20px;
+    border: 2px solid $orange;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    
+    &:hover {
+        background-color: $orange;
+        color: $very-dark-gray;
+        cursor: pointer;
+    }
+}
+
+.input {
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: $dark-blue;
+    color: $very-dark-gray;
+    border: 0;
+}
+
+.select {
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: $light-gray;
+    color: $very-dark-gray;
+    border: 0;
+}
+
+.textarea {
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: $dark-blue;
+    color: $very-dark-gray;
+    border: 0;
+}
+
+.bold {
+    font-family: Avenir-Bold;
+}

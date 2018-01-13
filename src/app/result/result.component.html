@@ -1,0 +1,14 @@
+<div class="result-wrapper">
+  <div class="correct bold" [class.wrong]="wrong">
+    {{correctMessage}}
+  </div>
+  <div class="points">
+    {{pointsMessage}}
+  </div>
+  <div class="new-points">
+    {{newPointsMessage}}
+  </div>
+  <div class="button" [routerLink]="['/article', articleService.currentArticle._id]">
+    Continue
+  </div>
+</div>

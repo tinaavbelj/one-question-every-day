@@ -1,0 +1,77 @@
+<div class="new-article-wrapper">
+  <div class="new-article-title">
+    New article
+  </div>
+  <div class="new-article-content">
+    <div class="input-wrapper">
+      <div class="input-label">
+        Question
+      </div>
+      <input class="input question" [(ngModel)]="articleData.question">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        1. answer
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.answer1">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        2. answer
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.answer2">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        3. answer
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.answer3">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        4. answer
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.answer4">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        Correct answer
+      </div>
+      <select class="select" [(ngModel)]="articleData.correctAnswer" placeholder="correct answer">
+        <option *ngFor="let c of [1,2,3,4]" [ngValue]="c"> {{c}} </option>
+      </select>
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        Additional URL
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.url">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        Attach PDF
+      </div>
+      <input class="input answer" [(ngModel)]="articleData.pdf">
+    </div>
+    <div class="input-wrapper">
+      <div class="input-label">
+        Article text
+      </div>
+      <textarea class="textarea" [(ngModel)]="articleData.articleText"></textarea>
+    </div>
+    <div class="button-wrapper">
+      <button class="button" (click)="newArticle()">save</button>
+    </div>
+  </div>
+</div>
+
+<!--
+question: String,
+answer1: String,
+answer2: String,
+answer3: String,
+answer4: String,
+date: Date,
+correctAnswer: Number,
+articleText: String
+-->

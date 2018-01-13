@@ -1,0 +1,35 @@
+[
+    {
+        "questionId": 1,
+        "questionText": "What’s the difference between regular food and organic food?",
+        "questionAnswers": ["answer 1", "word word word", "a3What’s the difference between regular food and org", "a4"],
+        "questionRightAnswer": "a3",
+        "questionCategory": "Consumerism",
+        "questionDate": "4.12.2017"
+    },
+    {
+        "questionId": 2,
+        "questionText": "What’s the difference between regular food and organic food?2",
+        "questionAnswers": ["a1", "a2", "a3", "a4"],
+        "questionRightAnswer": "a3",
+        "questionCategory": "Recycling",
+        "questionDate": "5.12.2017"
+    },
+    {
+        "questionId": 3,
+        "questionText": "What’s the difference between regular food and organic food?3",
+        "questionAnswers": ["a1", "a2", "a3", "a4"],
+        "questionRightAnswer": "a3",
+        "questionCategory": "Ecosystem",
+        "questionDate": "6.12.2017"
+    },
+    {
+        "questionId": 4,
+        "questionText": "What’s the difference between regular food and organic food?4",
+        "questionAnswers": ["a1", "a2", "a3", "a4"],
+        "questionRightAnswer": "a3",
+        "questionCategory": "Consumerism",
+        "questionDate": "7.12.2017"
+    }
+
+]

@@ -1,0 +1,11 @@
+<div class="article-wrapper">
+  <div class="article-title">
+    {{article.question}}
+  </div>
+  <div class="article-content">
+    <div class="article-url" *ngIf='article.url'>
+      <a href="{{article.url}}"><button class="button url-button">Go to article</button></a>
+    </div>
+    {{article.articleText}}
+  </div>
+</div>

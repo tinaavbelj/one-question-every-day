@@ -1,0 +1,37 @@
+<div class="articles-wrapper">
+  <div class="articles-title bold">
+    All Questions
+  </div>
+  <div class="new-article-link-wrapper">
+    <a class="new-article-link" [routerLink]="['/new-article']">
+      <button class="button">
+        new
+      </button>
+    </a>
+  </div>
+  <div class="articles-message">
+    {{message}}
+  </div>
+  <div class="article-element" *ngFor='let article of articles'>
+    <a [routerLink]="['/article', article._id]">
+      <div class="article-text">
+        {{article.question}}
+      </div>
+      <div class="article-data-wrapper">
+        <div class="article-date">
+          {{article.date}}
+        </div>
+      </div>
+    </a>
+    <div class="article-admin-options">
+        <a [routerLink]="['/edit-article', article._id]">
+          <div class="article-admin-options-element">
+            Edit
+          </div>
+        </a>
+        <div class="article-admin-options-element" (click)="deleteArticle(article._id)">
+          Delete
+        </div>
+    </div>
+  </div>
+</div>

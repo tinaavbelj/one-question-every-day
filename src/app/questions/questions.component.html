@@ -1,0 +1,19 @@
+<div class="questions-wrapper">
+  <div class="questions-title">
+    All Questions
+  </div>
+  <div class="question-element" *ngFor='let question of questions'>
+    <div class="question-text"><a [routerLink]="['/question-details', question.questionId]">{{ question.questionText }}</a></div>
+    <div class="question-data-wrapper">
+      <div class="question-date">
+        {{question.questionDate}}
+      </div>
+      <div class="question-data-divider">
+        ||
+      </div>
+      <div class="question-category">
+          {{question.questionCategory}}
+        </div>
+    </div>
+  </div>
+</div>

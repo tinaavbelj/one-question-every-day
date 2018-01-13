@@ -1,0 +1,66 @@
+<div class="edit-article-wrapper">
+    <div class="edit-article-title">
+      Edit article
+    </div>
+    <div class="edit-article-content">
+      <div class="input-wrapper">
+        <div class="input-label" >
+          Question
+        </div>
+        <input class="input question" [(ngModel)]="article.question">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          1. answer
+        </div>
+        <input class="input answer" [(ngModel)]="article.answer1">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          2. answer
+        </div>
+        <input class="input answer" [(ngModel)]="article.answer2">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          3. answer
+        </div>
+        <input class="input answer" [(ngModel)]="article.answer3">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          4. answer
+        </div>
+        <input class="input answer" [(ngModel)]="article.answer4">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          Correct answer
+        </div>
+        <select class="select" [(ngModel)]="article.correctAnswer" placeholder="correct answer">
+          <option *ngFor="let c of [1,2,3,4]" [ngValue]="c"> {{c}} </option>
+        </select>
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          URL
+        </div>
+        <input class="input answer" [(ngModel)]="article.url">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          PDF attachment
+        </div>
+        <input class="input answer" [(ngModel)]="article.pdf">
+      </div>
+      <div class="input-wrapper">
+        <div class="input-label">
+          Article text
+        </div>
+        <textarea class="textarea" [(ngModel)]="article.articleText"></textarea>
+      </div>
+      <div class="button-wrapper">
+        <button class="button" (click)="saveArticle()">save</button>
+      </div>
+    </div>
+  </div>

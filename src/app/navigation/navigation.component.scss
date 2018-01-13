@@ -1,0 +1,109 @@
+@import '../../variables.scss';
+
+.opened-mobile-nav{
+    @include breakpoint-768 {
+        left: 0 !important;
+    }
+}
+
+.nav-wrapper {
+    width: $navigation-width;
+    height: 100vh;
+    background-color: $very-dark-gray;
+    color: $light-gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include breakpoint-960 {
+        width: 30vw;
+    }
+
+    @include breakpoint-768 {
+        width: 100vw;
+        position: fixed;
+        top: 100px;
+        height: calc(100vh - 100px);
+        left: -100vw;
+        transition: 0.5s;
+        //left: -100vw;
+    }
+
+    a {
+        color: $light-gray;
+    }
+
+    .nav-logo-wrapper {
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+
+        @include breakpoint-768 {
+            display: none;
+        }
+
+        .nav-logo-img {
+            width: 150px;
+        }
+    }
+
+    .nav-profile-wrapper {
+        z-index: 21;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+        text-align: center;
+
+        @include breakpoint-768 {
+            display: none;
+        }
+
+        .nav-profile-picture {
+            //width: 80px;
+            //height: 80px;
+            text-align: center;
+
+            .nav-profile-picture-img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .nav-username {
+            color: $blue;
+            font-size: 23px;
+        }
+
+        .nav-points {
+            color: $green;
+            font-size: 20px;
+        }
+    }
+
+    .nav-links-wrapper {
+        padding-bottom: 30px;
+        z-index: 20;
+        text-transform: uppercase;
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: $dark-gray;
+            }
+
+            .nav-link-picture {
+                margin-right: 10px;
+
+                .nav-link-picture-img {
+                    width: 30px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

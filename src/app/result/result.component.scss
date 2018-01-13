@@ -1,0 +1,46 @@
+@import '../../variables.scss';
+
+.result-wrapper {
+    width: 100%;
+    height: 100vh;
+    background-image: url("~/assets/images/pattern.svg");
+    background-color: $bg-dark-gray;
+    background-size: 400px 400px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    .correct {
+        font-size: 40px;
+        color: $green;
+
+        &.wrong {
+            color: $red;
+        }
+    }
+
+    .points {
+        margin: 40px 0 5px 0;
+        font-size: 30px;
+        color: $orange;
+    }
+
+    .new-points {
+        margin-bottom: 40px;
+        font-size: 25px;
+        color: $orange;
+    }
+
+    .button {
+        color: $blue;
+        border-color: $blue;
+
+        &:hover {
+            color: $dark-gray;
+            background-color: $blue;
+        }
+    }
+    
+}

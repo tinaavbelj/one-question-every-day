@@ -1,0 +1,65 @@
+@import '../../variables.scss';
+
+.question-wrapper {
+    width: 100%;
+    padding-top: 80px;
+    
+    @include breakpoint-768 {
+        padding-top: 30px;
+    }
+
+    .question-title {
+        //margin-left: 10vh;
+        margin: auto;
+        font-size: 30px;
+        width: 250px;
+    }
+
+    .question {
+        margin: 20px 10vw;
+        .question-text {
+            margin-bottom: 20px;
+            color: $light-gray;
+            font-size: 30px;
+        }
+
+        .answers-wrapper {
+
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .question-answer-wrapper {
+                width: 49%;
+                margin-bottom: 10px;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                background-color: $green;
+                color: $very-dark-gray;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+
+                @include breakpoint-768 {
+                    width: 100%;
+                }
+
+                &:hover {
+                    background-color: $dark-green;
+                    cursor: pointer;
+                }
+
+                .question-answer {
+
+                }
+
+            }
+        }
+    }
+
+    .submit-button-wrapper {
+        margin-top: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}

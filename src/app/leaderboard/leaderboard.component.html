@@ -1,0 +1,16 @@
+<div class="leaderboard-wrapper">
+  <div class="leaderboard-title bold">
+    Leaderboard
+  </div>
+  <div class="leaderboard-element" *ngFor='let user of userService.users; let i = index'>
+    <div class="leaderboard-place bold">
+        {{i+1}}
+    </div>
+    <div class="leaderboard-username">
+      {{user.username}}
+    </div>
+    <div class="leaderboard-points">
+      {{user.points}}
+    </div>
+  </div>
+</div>

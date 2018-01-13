@@ -1,0 +1,93 @@
+@font-face {
+    font-family: OpenSans-Light;
+    src: url("~/assets/fonts/OpenSans-Light.woff") format("woff");
+}
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url("~/assets/fonts/OpenSans-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family : Montserrat-Regular;
+    src         : url("~/assets/fonts/MontserratRegular.woff") format("woff");
+}
+
+@font-face {
+    font-family : PlayfairDisplay-Regular;
+    src         : url("~/assets/fonts/PlayfairDisplay-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family : PlayfairDisplay-Bold;
+    src         : url("~/assets/fonts/PlayfairDisplay-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: Futura-Heavy;
+    src: url("~/assets/fonts/FuturaHeavy.woff") format("woff");
+}
+
+@font-face {
+    font-family: Futura-Light;
+    src: url("~/assets/fonts/FuturaLight.woff") format("woff");
+}
+
+@font-face {
+    font-family: Avenir-Demi;
+    src: url("~/assets/fonts/Avenir-Next-LT-Pro-Demi.woff") format("woff");
+}
+
+@font-face {
+    font-family: Avenir-Bold;
+    src: url("~/assets/fonts/Avenir-Next-LT-Pro-Bold.woff") format("woff");
+}
+
+$light-gray: #d3d3d3;
+$gray: #4C4C4D;
+$dark-gray: #202020;
+$dark-gray-awards: #2B2B2B;
+$very-dark-gray: #191919;
+$bg-dark-gray: #2B2B2A;
+$very-light-blue: #c3e7eb;
+$dark-blue: #61A9B2;
+$blue: #68B7C0;
+$very-dark-blue: #4e5d5e;
+$red: #EF5656;
+$bg-dark-red: #DD5050;
+$dark-red: #783A3A;
+$orange: #EB9747;
+$dark-orange: #DD8D41;
+$green: #5AA267;
+$dark-green: #477F51;
+
+$navigation-width: 20vw;
+$content-width: 80vw;
+
+@mixin breakpoint-2560 {
+    @media only screen and (min-width: 1921px) and (max-width: 2560px) { @content; }
+}
+  
+@mixin breakpoint-1920 {
+    @media only screen and (min-width: 1681px) and (max-width: 1920px) { @content; }
+}
+  
+@mixin breakpoint-1680 {
+    @media only screen and (min-width: 1441px) and (max-width: 1680px) { @content; }
+}
+  
+@mixin breakpoint-1440 {
+    @media only screen and (min-width: 1281px) and (max-width: 1440px) { @content; }
+}
+  
+@mixin breakpoint-1280 {
+    @media only screen and (max-width: 1280px) { @content; }
+}
+
+@mixin breakpoint-960 {
+    @media only screen and (max-width: 960px) { @content; }
+}
+
+@mixin breakpoint-768 {
+    @media only screen and (max-width: 768px) { @content; }
+}

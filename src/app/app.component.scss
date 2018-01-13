@@ -1,0 +1,97 @@
+@import '../variables.scss';
+
+.app-wrapper {
+    display: flex;
+
+    .navigation {
+        
+    }
+
+    .content {
+        width: $content-width;
+        height: 100vh;
+        background-color: $dark-gray;
+        color: $very-dark-gray;
+
+        @include breakpoint-960 {
+            width: 70vw;
+        }
+
+        @include breakpoint-768 {
+            width: 100vw;
+            height: calc(100vh - 100px);
+            margin-top: 100px;
+        }
+    }
+
+    .nav-mobile {
+        display: none;
+
+        @include breakpoint-768 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            height: 100px;
+            width: 100%;
+            background-color: $very-dark-gray;
+            color: $light-gray;
+        }
+
+        .nav-mobile-element {
+            width: 33vw;
+            display: flex;
+            
+            &.icon {
+                justify-content: flex-start;
+            }
+
+            &.logo {
+                justify-content: center;
+            }
+
+            &.profile {
+                justify-content: flex-end;
+            }
+
+            .nav-icon {
+                height: 50px;
+                padding: 0 10px;
+                text-align: left;
+    
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+    
+            .nav-mobile-logo-a {
+                text-align:center;
+    
+                .nav-mobile-logo {
+                height: 90px;
+                padding: 0 5px;
+                
+                }
+            }
+    
+            .nav-mobile-profile {
+                height: 90px;
+                padding: 0 10px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                flex-direction: column;
+
+                .nav-mobile-profile-username {
+                    color: $blue;
+                    font-size: 16px;
+                }
+
+                .nav-mobile-profile-points {
+                    color: $green;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

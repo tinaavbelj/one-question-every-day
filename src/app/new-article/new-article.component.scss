@@ -1,0 +1,59 @@
+@import '../../variables.scss';
+
+.new-article-wrapper {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: $bg-dark-gray;
+
+    .new-article-title {
+        padding: 30px;
+        width: 100%;
+        font-size: 50px;
+        color: $red;
+    }
+
+    .new-article-content {
+        margin: 0 30px;
+        padding-bottom: 30px;
+
+        .input-wrapper {
+            margin-bottom: 20px;
+
+            .input-label {
+                margin-bottom: 10px;
+                color: $light-gray;
+            }
+
+            .input {
+                background-color: $light-gray;
+                color: $very-dark-gray;
+            }
+
+            .textarea {
+                height: 70vh;
+                background-color: $light-gray;
+                color: $very-dark-gray;
+            }
+
+            .select {
+                width: 100px;
+            }
+        }
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+
+            .button {
+                border-color: $red;
+                color: $red;
+
+                &:hover {
+                    background-color: $red;
+                    color: $dark-gray;
+                }
+            }
+        }
+    }
+}

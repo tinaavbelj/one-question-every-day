@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+.article-wrapper {
+    margin: auto;
+    padding-bottom: 30px;
+    width: 100%;
+    background-color: $bg-dark-gray;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 30px;
+
+    .article-title {
+        font-size: 40px;
+        color: $red;
+    }
+
+    .article-content {
+        margin-top: 30px;
+        color: $light-gray;
+
+        .article-url {
+            text-align: center;
+
+            .url-button {
+                margin-bottom: 30px;
+                font-size: 16px;
+            }
+        }
+    }
+}

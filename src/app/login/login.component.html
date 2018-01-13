@@ -1,0 +1,24 @@
+<div class="login-wrapper">
+    <div class="login-form-wrapper">
+        <div class="login-title bold">
+            Log in
+            <!--<img class="login-title-img" src="./assets/images/log-in.svg">-->
+        </div>
+        <div class="input-wrapper">
+            <div class="input-label">
+            email
+            </div>
+            <input class="input" name="email" type="text" [(ngModel)]="loginData.email">
+        </div>
+        <div class="input-wrapper">
+            <div class="input-label">
+            password
+            </div>
+            <input class="input" type="password" [(ngModel)]="loginData.password">
+        </div>
+        <div class="button-wrapper">
+            <button  class="button" (click)="post()">Submit</button>
+        </div>
+    </div>
+    <!--<app-landscape></app-landscape>-->
+</div>

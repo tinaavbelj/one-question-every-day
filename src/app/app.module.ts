@@ -67,8 +67,9 @@ import { ResultComponent } from './result/result.component';
       { path: 'result', component: ResultComponent},
       { path: 'user/:id', component: UserComponent },
       { path: 'question-details/:id', 
-        canActivate:[ QuestionDetailsGuardService ],
-        component: QuestionDetailsComponent},
+        canActivate: [ QuestionDetailsGuardService ],
+        component: QuestionDetailsComponent
+      },
       { path: '', redirectTo: 'question', pathMatch: 'full'}
       /* { path: 'question/:id', component: QuestionDetailComponent } */
     ]),

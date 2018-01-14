@@ -9,10 +9,9 @@ import { User } from "./user";
 @Injectable()
 export class UserService {
 
-  private _registerUrl = 'http://localhost:3000/register'
-  private _loginUrl = 'http://localhost:3000/login'
-  private _usersUrl = 'http://localhost:3000/users'
-  private _userUrl = 'http://localhost:3000/user/'
+  private _registerUrl = 'http://localhost:3000/api/users/register'
+  private _loginUrl = 'http://localhost:3000/api/users/login'
+  private _usersUrl = 'http://localhost:3000/api/users'
   public userId
   public user
   public correctLastAnswer: boolean = false
@@ -43,7 +42,7 @@ export class UserService {
     }
 
     getUser(id) {
-      return this._http.get(this._userUrl + id)
+      return this._http.get(this._usersUrl + '/' + id)
     }
 
     updateUser(data, id) {

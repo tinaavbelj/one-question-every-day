@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ArticleService {
-    private articlesUrl = 'http://localhost:3000/articles'
+    private articlesUrl = 'http://localhost:3000/api/articles'
 
     articles = []
     currentArticle

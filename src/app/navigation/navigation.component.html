@@ -10,10 +10,10 @@
     </div>
     <a [routerLink]="['/profile']">
       <div class="nav-username bold">
-        {{userService.user.username}}
+        {{userService.user?.username}}
       </div>
       <div class="nav-points">
-        {{userService.user.points}}
+        {{userService.user?.points}}
       </div>
     </a>
   </div>

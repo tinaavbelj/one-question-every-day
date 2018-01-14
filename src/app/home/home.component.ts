@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private articleService: ArticleService, private userService: UserService) { }
 
   ngOnInit() {
-    console.log(this.userService.user)
     let id = this.route.snapshot.params.id
     this.currentId = id;
     this.articleService.getArticles().subscribe(articles => {

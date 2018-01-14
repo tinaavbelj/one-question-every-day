@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { QuestionService } from './question/question.service';
-import { User } from "./shared/user/user";
 import { UserService } from "./shared/user/user.service";
-import { ArticleService } from "./shared/article/article.service";
-//import { QuestionService } from "./shared/article/article.service";
+import { User } from "./shared/user/user";
   
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [ QuestionService, UserService, ArticleService ]
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  
   title = 'app'
   user: User
   isLoggingIn = true
   state: string = 'small'
   public navigation: boolean = false
   
-  constructor(private userService: UserService) {
-    this.user = new User()
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
+    this.user = this.userService.user
   }
 
   toggleNavigation() {
@@ -30,4 +29,5 @@ export class AppComponent {
   receiveClickedLink($event) {
     this.navigation = $event
   }
+  
 }

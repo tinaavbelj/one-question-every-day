@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from './question.service';
+import { QuestionService } from '../shared/question/question.service';
 import { LandscapeComponent } from '../landscape/landscape.component';
 
 @Component({

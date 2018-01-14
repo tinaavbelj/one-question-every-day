@@ -11,9 +11,14 @@ import { UserService } from '../shared/user/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  user
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.me().subscribe(user => {
+      this.user = user
+    })
   }
 
 }

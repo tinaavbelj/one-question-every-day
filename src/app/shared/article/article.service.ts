@@ -1,30 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ArticleService {
-    private articlesUrl = 'http://localhost:3000/api/articles'
+    
+    private _articlesUrl = environment.apiUrl + '/api/articles'
 
-    articles = []
-    currentArticle
-    responseStatus
+    public currentArticle
 
-    constructor (private _http: Http) {}
+    constructor (private _http: Http) { }
 
-    getArticles(): Observable<any> {
-        return this._http.get(this.articlesUrl).map(res => res.json())
-    }
-
-    saveCurrentArticle() {
-        this._http.get(this.articlesUrl).subscribe(res => {
-            this.currentArticle = res.json()[0]
-        })
-    }
-
-    newArticle(articleData): Observable<string> {
-        return this._http.post(this.articlesUrl, articleData)
+    createArticle(articleData, pdfFile): Observable<string> {
+        let formData : FormData = new FormData()
+        formData.append('data', JSON.stringify(articleData))
+        if (pdfFile) {
+            formData.append('pdf', pdfFile, pdfFile.name)
+        }
+        return this._http.post(this._articlesUrl, formData, this.getRequestOptions())
             .map(res => {
                 const status = res.status
                 if (status === 201) {
@@ -35,12 +30,21 @@ export class ArticleService {
             })
     }
 
-    getArticle(id): Observable<any> {
-        return this._http.get(this.articlesUrl + '/' + id).map(res => res.json())
+    getArticles(): Observable<any> {
+        return this._http.get(this._articlesUrl, this.getRequestOptions()).map(res => res.json())
     }
 
-    editArticle(articleData, id): Observable<string> {
-        return this._http.put(this.articlesUrl + '/' + id, articleData, {})
+    getArticle(id): Observable<any> {
+        return this._http.get(this._articlesUrl + '/' + id, this.getRequestOptions()).map(res => res.json())
+    }
+
+    updateArticle(articleData, pdfFile, id): Observable<string> {
+        let formData : FormData = new FormData()
+        formData.append('data', JSON.stringify(articleData))
+        if (pdfFile) {
+            formData.append('pdf', pdfFile, pdfFile.name)
+        }
+        return this._http.put(this._articlesUrl + '/' + id, formData, this.getRequestOptions())
             .map(res => {
                 const status = res.status
                 if (status === 204) {
@@ -52,7 +56,7 @@ export class ArticleService {
     }
 
     deleteArticle(id): Observable<string> {
-        return this._http.delete(this.articlesUrl + '/' + id)
+        return this._http.delete(this._articlesUrl + '/' + id, this.getRequestOptions())
             .map(res => {
                 const status = res.status
                 if (status === 204) {
@@ -63,9 +67,10 @@ export class ArticleService {
             })
     }
 
-    getArticleForToday(): Observable<any> {
-        return this._http.get(this.articlesUrl).map(res => {
-            res.json()
-        })
-    }
+    private getRequestOptions() {
+        const headers = new Headers()
+        headers.append('x-access-token', localStorage.getItem('token'))
+        const options = new RequestOptions({ headers: headers })
+        return options
+      }
 }

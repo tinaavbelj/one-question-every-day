@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { User } from '../shared/user/user';
 import { UserService } from '../shared/user/user.service';
+import { User } from '../shared/user/user';
 
 @Component({
   selector: 'app-leaderboard',
@@ -11,11 +11,14 @@ import { UserService } from '../shared/user/user.service';
 })
 export class LeaderboardComponent implements OnInit {
 
+  users
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUsers()
-    console.log(this.userService.getUsers())
+    this.userService.getUsers().subscribe(users => {
+      this.users = users
+    })
   }
 
 }

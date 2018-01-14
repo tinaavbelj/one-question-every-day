@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { environment } from '../../environments/environment'
 
 import { ArticleService } from '../shared/article/article.service';
 
@@ -15,8 +15,11 @@ export class ArticleComponent implements OnInit {
   currentId
   article = {
     question: '',
+    url: '',
+    pdf: '',
     articleText: ''
   }
+  pdfUrl
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) { }
 
@@ -25,6 +28,10 @@ export class ArticleComponent implements OnInit {
     this.currentId = id;
     this.articleService.getArticle(this.currentId).subscribe(article => {
       this.article = article
+
+      if (article.pdf) {
+        this.pdfUrl = environment.apiUrl + '/api/articles/pdf/' + article.pdf
+      }
     })
   }
 }

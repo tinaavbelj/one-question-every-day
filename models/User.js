@@ -5,10 +5,10 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     username: String,
+    admin: Boolean,
     points: Number,
     answeredToday: Boolean,
     lastAnswer: Boolean
-
 })
 
 userSchema.pre('save', function(next) {

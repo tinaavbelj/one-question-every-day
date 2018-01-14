@@ -26,10 +26,13 @@
             <div class="input-label">
             Confirm password
             </div>
-            <input class="input" [(ngModel)]="registerData.password" type="password">
+            <input class="input" [(ngModel)]="passwordConfirmation" type="password">
         </div>
         <div class="button-wrapper">
-            <button  class="button" (click)="post()">Submit</button>
+            <button class="button" (click)="register()">Register</button>
+        </div>
+        <div class="error-wrapper">
+            <div class="error" *ngFor="let error of errors">{{error}}</div>
         </div>
     </div>
 </div>

@@ -96,6 +96,10 @@
                 background-color: $dark-gray;
             }
 
+            &.logout {
+                cursor: pointer;
+            }
+
             .nav-link-picture {
                 margin-right: 10px;
 

@@ -10,5 +10,6 @@ module.exports = mongoose.model('Article', {
     date: Date,
     articleText: String,
     new: Boolean,
-    url: String
+    url: String,
+    pdf: String
 })

@@ -8,19 +8,19 @@
       <img class="nav-icon" src="./assets/images/menu2.svg" (click)="toggleNavigation()">
     </div>
     <div class="nav-mobile-element logo">
-      <a [routerLink]="['/home']" class="nav-mobile-logo-a"><img class="nav-mobile-logo" src="./assets/images/logo4.svg"></a>
+      <a [routerLink]="['/home']" class="nav-mobile-logo-a" (click)="this.navigation = false"><img class="nav-mobile-logo" src="./assets/images/logo4.svg"></a>
     </div>    
-    <div class="nav-mobile-element profile">
-      <a [routerLink]="['/profile']" *ngIf='userService.user'>
-      <div class="nav-mobile-profile">
-        <div class="nav-mobile-profile-username">
-          {{userService.user.username}}
+    <div class="nav-mobile-element profile" *ngIf="user">
+      <a [routerLink]="['/profile']">
+        <div class="nav-mobile-profile">
+          <div class="nav-mobile-profile-username">
+            {{user.username}}
+          </div>
+          <div class="nav-mobile-profile-points">
+            {{user.points}}
+          </div>
         </div>
-        <div class="nav-mobile-profile-points">
-          {{userService.user.points}}
-        </div>
-      </div>
-    </a>
+      </a>
     </div>
   </div>
   <div class="content">

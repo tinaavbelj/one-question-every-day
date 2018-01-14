@@ -18,6 +18,10 @@ export class HomeComponent implements OnInit {
     question: '',
     articleText: '',
     correctAnswer: 0,
+    answer1: '',
+    answer2: '',
+    answer3: '',
+    answer4: '',
     _id: 0
   }
   user
@@ -33,11 +37,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.params.id
     this.currentId = id;
+
+    this.user = this.userService.user
+
     this.articleService.getArticles().subscribe(articles => {
       this.article = articles[articles.length - 1]
+      this.articleService.currentArticle = this.article
     })
-    this.articleService.saveCurrentArticle()
-    //this.user =
   }
 
   selectAnswer(answer) {
@@ -63,19 +69,15 @@ export class HomeComponent implements OnInit {
   submit() {
     if(this.selectedAnswer1) {
       this.correct = this.checkAnswer(1)
-      console.log(this.correct)
     }
     else if(this.selectedAnswer2) {
       this.correct = this.checkAnswer(2)
-      console.log(this.correct)
     }
     else if(this.selectedAnswer3) {
       this.correct = this.checkAnswer(3)
-      console.log(this.correct)
     }
     else if(this.selectedAnswer4){
       this.correct = this.checkAnswer(4)
-      console.log(this.correct)
     }
     else {
       this.message="Please select your answer."
@@ -100,8 +102,8 @@ export class HomeComponent implements OnInit {
   }
   
   updatePoints(points) {
-    this.userService.user['points'] = this.userService.user['points'] + points
-    this.userService.updateUser(this.userService.user, this.userService.userId).subscribe(message => {
+    this.user['points'] += points
+    this.userService.updateUser(this.user, this.user._id).subscribe(message => {
       console.log(message)
     })
   }

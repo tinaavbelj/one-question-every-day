@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import {  } from '@angular/router';
 
-import { QuestionService } from '../question/question.service';
 import { LandscapeComponent } from '../landscape/landscape.component';
+import { QuestionService } from '../shared/question/question.service';
+
 
 @Component({
   selector: 'app-question-details',
@@ -13,19 +14,20 @@ import { LandscapeComponent } from '../landscape/landscape.component';
 })
 export class QuestionDetailsComponent implements OnInit {
 
-  currentId;
+  currentId
+  questions
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _questionService: QuestionService) { 
-
-  }
+  constructor(private router: Router, private route: ActivatedRoute, private questionService: QuestionService) { }
 
   ngOnInit() {
-    let id = +this._route.snapshot.paramMap.get('id');
+    let id = +this.route.snapshot.paramMap.get('id');
     this.currentId = id;
-    //this._questionService.getQuestions().subscribe(questions => this.questions = questions);
+    this.questionService.getQuestions().subscribe(questions => {
+      this.questions = questions
+    });
   }
 
   onBack(): void {
-    this._router.navigate(['/admin-panel']);
+    this.router.navigate(['/admin-panel']);
   }
 }

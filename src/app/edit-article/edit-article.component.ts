@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ArticleService } from '../shared/article/article.service';
-
 
 @Component({
   selector: 'app-edit-article',
@@ -16,31 +14,38 @@ export class EditArticleComponent implements OnInit {
   currentId
   article = {
     question: '',
-    articleText: '',
     answer1: '',
     answer2: '',
     answer3: '',
     answer4: '',
-    correctAnswer: 1
+    correctAnswer: 1,
+    url: '',
+    pdf: '',
+    articleText: ''
   }
+  pdfFile = null
+  pdfFileRemoved = false
   message
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService, private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute, private articleService: ArticleService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params.id
     this.currentId = id;
-    this.articleService.getArticle(this.currentId).subscribe(data => {
-      this.article = data
-      console.log(this.article)
+    this.articleService.getArticle(this.currentId).subscribe(article => {
+      this.article = article
     })
   }
 
   saveArticle() {
-    this.articleService.editArticle(this.article, this.currentId).subscribe(message => {
-      console.log(message)
+    this.articleService.updateArticle(this.article, this.pdfFile, this.currentId).subscribe(message => {
       this.message = message
+      this.router.navigate(['/articles'])
     })
-    this.router.navigate(['articles'])
   }
+
+  handlePdf(file) {
+    this.pdfFile = file
+  }
+
 }

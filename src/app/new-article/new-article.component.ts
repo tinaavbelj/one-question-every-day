@@ -11,21 +11,35 @@ import { ArticleService } from '../shared/article/article.service';
 })
 export class NewArticleComponent implements OnInit {
 
-  articleData = {}
+  articleData = {
+    question: '',
+    answer1: '',
+    answer2: '',
+    answer3: '',
+    answer4: '',
+    correctAnswer: '',
+    url: '',
+    articleText: ''
+  }
+  pdfFile = null
   message
 
-  constructor(private articleService: ArticleService, private router: Router) { }
+  constructor(private router: Router, private articleService: ArticleService) { }
 
   ngOnInit() {
 
   }
 
-  newArticle() {
+  createArticle() {
     this.articleData['new'] = true
-    this.articleService.newArticle(this.articleData).subscribe(message => {
-      console.log(message)
+    this.articleService.createArticle(this.articleData, this.pdfFile).subscribe(message => {
       this.message = message
-      this.router.navigate(['articles'])
+      this.router.navigate(['/articles'])
     })
   }
+
+  handlePdf(file) {
+    this.pdfFile = file
+  }
+  
 }

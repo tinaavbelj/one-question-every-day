@@ -15,19 +15,22 @@ import { LandscapeComponent } from '../landscape/landscape.component';
 export class LoginComponent implements OnInit {
 
   title = 'app';
-  loginData = {}
-  
-  constructor(private userService: UserService, private router: Router) {
-    
+  loginData = {
+    email: '',
+    password: ''
   }
+  
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  post() {
+  login() {
     this.userService.loginUser(this.loginData)
-    this.router.navigate(['home'])
   }
 
+  register() {
+    this.router.navigate(['/register'])
+  }
 
 }

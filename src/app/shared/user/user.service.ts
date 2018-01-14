@@ -1,61 +1,108 @@
 import { Injectable } from "@angular/core"
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
-import { Observable } from 'rxjs/Observable'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
-
-import { User } from "./user";
+import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { environment } from '../../../environments/environment'
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
+import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/catch'
 
 @Injectable()
 export class UserService {
 
-  private _registerUrl = 'http://localhost:3000/api/users/register'
-  private _loginUrl = 'http://localhost:3000/api/users/login'
-  private _usersUrl = 'http://localhost:3000/api/users'
-  public userId
+  private userChanged = new Subject<any>()
+  private _registerUrl = environment.apiUrl + '/api/auth/register'
+  private _loginUrl = environment.apiUrl + '/api/auth/login'
+  private _logoutUrl = environment.apiUrl + '/api/auth/logout'
+  private _verifyUrl = environment.apiUrl + '/api/auth/verify'
+  private _usersUrl = environment.apiUrl + '/api/users'
+  
   public user
+  public userId
   public correctLastAnswer: boolean = false
 
-  users = []
+  constructor(private _http: Http, private _httpClient: HttpClient, private router: Router) { }
 
-    constructor(private _http: Http, private _httpClient: HttpClient, private router: Router) { //     private _http: HttpClient
-    }
+  registerUser(registerData) {
+    this._http.post(this._registerUrl, registerData).subscribe(res => {
+      this.router.navigate(['/login'])
+    })
+  }
 
-    registerUser(registerData) {
-      this._http.post(this._registerUrl, registerData).subscribe(res => {
-       this.router.navigate(['/login'])
+  loginUser(loginData) {
+    this._httpClient.post<any>(this._loginUrl, loginData).subscribe(res => {
+      localStorage.setItem('token', res.token)
+      this.me().subscribe((user: any) => {
+        this.user = user
+        this.userId = user._id
+        this.router.navigate(['/home'])
+        this.sendUserChanged(user)
       })
-    }
+    })
+  }
 
-    loginUser(loginData) {
-      this._httpClient.post<any>(this._loginUrl, loginData).subscribe(res => {
-        localStorage.setItem('token', res.token)
-        this.userId = res.user._id
-        this.user = res.user
-       })
-    }
+  logoutUser() {
+    this._http.post(this._logoutUrl, {}).subscribe(res => {
+      localStorage.removeItem('token')
+      this.user = undefined
+      this.userId = undefined
+      this.router.navigate(['/login'])
+      this.sendUserChanged(this.user)
+    })
+  }
 
-    getUsers() {
-      this._http.get(this._usersUrl).subscribe(res => {
-        this.users = res.json()
+  me() {
+    return this._http.get(this._usersUrl + '/me', this.getRequestOptions()).map(res => {
+      const user = res.json()
+      this.user = user
+      this.sendUserChanged(this.user)
+      return user
+    })
+  }
+
+  getUsers(): Observable<any> {
+    return this._http.get(this._usersUrl, this.getRequestOptions()).map(res => res.json())
+  }
+
+  getUser(id): Observable<any> {
+    return this._http.get(this._usersUrl + '/' + id, this.getRequestOptions()).map(res => res.json())
+  }
+
+  updateUser(userData, id) {
+    return this._http.put(this._usersUrl + '/' + id, userData, this.getRequestOptions())
+      .map(res => {
+        this.user = userData
+        this.sendUserChanged(userData)
+
+        const status = res.status
+        if (status === 204) {
+            return 'User was successfully updated.'
+        } else {
+            return 'User was not updated.'
+        }
       })
-    }
+  }
 
-    getUser(id) {
-      return this._http.get(this._usersUrl + '/' + id)
-    }
+  isAuthenticated(): Observable<boolean> {
+    return this._http.get(this._verifyUrl, this.getRequestOptions())
+      .map(res => res.status === 200)
+      .catch(error => Observable.of(false))
+  }
 
-    updateUser(data, id) {
-      console.log('data')
-      console.log(data)
-      return this._http.put(this._usersUrl + '/' + id, data, {})
-        .map(res => {
-            const status = res.status
-            if (status === 204) {
-                return 'User was successfully updated.'
-            } else {
-                return 'User was not updated.'
-            }
-        })
-    }
+  sendUserChanged(user) {
+    this.userChanged.next(user);
+  }
+
+  receiveUserChanged(): Observable<any> {
+    return this.userChanged.asObservable();
+  }
+
+  private getRequestOptions() {
+    const headers = new Headers()
+    headers.append('x-access-token', localStorage.getItem('token'))
+    const options = new RequestOptions({ headers: headers })
+    return options
+  }
+
 }

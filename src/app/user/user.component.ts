@@ -12,16 +12,14 @@ import { UserService } from '../shared/user/user.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
-
   user
+
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     var id = this.route.snapshot.params.id
-    console.log(id)
-    this.userService.getUser(id).subscribe(data => {
-      this.user = data.json()
-      console.log(data)
+    this.userService.getUser(id).subscribe(user => {
+      this.user = user
     })
   }
 

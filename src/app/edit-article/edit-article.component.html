@@ -38,7 +38,7 @@
           Correct answer
         </div>
         <select class="select" [(ngModel)]="article.correctAnswer" placeholder="correct answer">
-          <option *ngFor="let c of [1,2,3,4]" [ngValue]="c"> {{c}} </option>
+          <option *ngFor="let c of [1,2,3,4]" [ngValue]="c" [selected]="c === article.correctAnswer"> {{c}} </option>
         </select>
       </div>
       <div class="input-wrapper">
@@ -51,7 +51,8 @@
         <div class="input-label">
           PDF attachment
         </div>
-        <input class="input answer" [(ngModel)]="article.pdf">
+        <button class="button" (click)="pdfFileRemoved = true" *ngIf="article.pdf || !pdfFileRemoved">Remove existing</button>
+        <input class="input answer" type="file" *ngIf="article.pdf === '' || pdfFileRemoved" (change)="handlePdf($event.target.files.item(0))">
       </div>
       <div class="input-wrapper">
         <div class="input-label">

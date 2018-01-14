@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { ArticleService } from '../shared/article/article.service';
+import { UserService } from '../shared/user/user.service';
 
 @Component({
   selector: 'app-articles',
@@ -10,16 +11,17 @@ import { ArticleService } from '../shared/article/article.service';
 })
 export class ArticlesComponent implements OnInit {
 
-  message
-  responseStatus
+  user
   articles
+  message
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService, private userService: UserService) { }
 
   ngOnInit() {
-    this.articleService.getArticles().subscribe(articles => {
-      this.articles = articles
+    this.user = this.userService.me().subscribe(user => {
+      this.user = user
     })
+    this.refreshArticles()
   }
 
   deleteArticle(articleId) {

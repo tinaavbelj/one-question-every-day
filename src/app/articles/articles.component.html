@@ -2,7 +2,7 @@
   <div class="articles-title bold">
     All Questions
   </div>
-  <div class="new-article-link-wrapper">
+  <div class="new-article-link-wrapper" *ngIf="user.admin">
     <a class="new-article-link" [routerLink]="['/new-article']">
       <button class="button">
         new
@@ -23,7 +23,7 @@
         </div>
       </div>
     </a>
-    <div class="article-admin-options">
+    <div class="article-admin-options" *ngIf="user.admin">
         <a [routerLink]="['/edit-article', article._id]">
           <div class="article-admin-options-element">
             Edit

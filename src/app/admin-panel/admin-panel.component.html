@@ -25,7 +25,7 @@
     <div class="questions-title">
       All Questions
     </div>
-    <div class="question-element" *ngFor='let question of articleService.articles'>
+    <div class="question-element" *ngFor='let question of articles'>
       <div class="question-text"><a [routerLink]="['/question-details', question.questionId]">{{ question.questionText }}</a></div>
       <div class="question-data-wrapper">
         <div class="question-date">

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { ArticleService } from '../shared/article/article.service';
+import { QuestionService } from '../shared/question/question.service';
 
 @Component({
   selector: 'app-questions',
@@ -12,13 +12,13 @@ import { ArticleService } from '../shared/article/article.service';
 
 export class QuestionsComponent implements OnInit {
 
-
+  questions
   
-  constructor(private _articleService: ArticleService) { 
-  }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
-    /*this.questions = this._questionService.getQuestions();*/
-    //this._questionService.getQuestions().subscribe(questions => this.questions = questions);
+    this.questionService.getQuestions().subscribe(questions => {
+      this.questions = questions
+    });
   }
 }

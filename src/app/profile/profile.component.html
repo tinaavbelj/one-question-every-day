@@ -9,15 +9,15 @@
         <img class="profile-picture-img" src="./assets/images/f_purple.png">
       </div>
     -->
-      <div class="profile-info-text">
+      <div class="profile-info-text" *ngIf="user">
         <div class="profile-username">
-          {{userService.user.username}}
+          {{user.username}}
         </div>
         <div class="profile-points">
-          {{userService.user.points}}
+          {{user.points}}
         </div>
         <div class="profile-email">
-          {{userService.user.email}}
+          {{user.email}}
         </div>
       </div>
     </div>

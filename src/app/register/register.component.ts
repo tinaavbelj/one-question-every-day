@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
-import { User } from '../shared/user/user';
-import { UserService } from '../shared/user/user.service';
 import { LandscapeComponent } from '../landscape/landscape.component';
+import { UserService } from '../shared/user/user.service';
+import { User } from '../shared/user/user';
 
 @Component({
   selector: 'app-register',
@@ -13,17 +13,44 @@ import { LandscapeComponent } from '../landscape/landscape.component';
 })
 export class RegisterComponent implements OnInit {
   
-  registerData = {}
+  registerData = {
+    username: '',
+    email: '',
+    password: ''
+  }
+  passwordConfirmation = ''
+  errors = []
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    
   }
 
-  post() {
-    this.registerData['points'] = 0
-    console.log(this.registerData)
-    this.userService.registerUser(this.registerData)
+  register() {
+    this.errors = []
+
+    if (this.registerData.username.length < 3) {
+      this.errors.push('Username has to be at least 4 characters long')
+    }
+
+    if (this.registerData.email.length < 6) {
+      this.errors.push('Email has to be at least 6 characters long')
+    }
+
+    if (this.registerData.password.length < 6) {
+      this.errors.push('Password has to be at least 6 characters long')
+    }
+
+    if (this.registerData.password !== this.passwordConfirmation) {
+      this.errors.push('Passwords do not match')
+    }
+
+    if (this.errors.length === 0) {
+      this.registerData['admin'] = false
+      this.registerData['points'] = 0
+      this.userService.registerUser(this.registerData)
+    }
   }
 
 }

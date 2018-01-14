@@ -51,7 +51,7 @@
       <div class="input-label">
         PDF attachment
       </div>
-      <input class="input answer" [(ngModel)]="articleData.pdf">
+      <input class="input answer" type="file" (change)="handlePdf($event.target.files.item(0))">
     </div>
     <div class="input-wrapper">
       <div class="input-label">
@@ -60,7 +60,7 @@
       <textarea class="textarea" [(ngModel)]="articleData.articleText"></textarea>
     </div>
     <div class="button-wrapper">
-      <button class="button" (click)="newArticle()">save</button>
+      <button class="button" (click)="createArticle()">save</button>
     </div>
   </div>
 </div>

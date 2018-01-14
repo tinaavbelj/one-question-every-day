@@ -8,16 +8,16 @@
     <div class="nav-profile-picture">
       <!--<img class="nav-profile-picture-img" src="./assets/images/f_purple.png">-->
     </div>
-    <a [routerLink]="['/profile']">
+    <a [routerLink]="['/profile']" *ngIf="user">
       <div class="nav-username bold">
-        {{userService.user?.username}}
+        {{user.username}}
       </div>
       <div class="nav-points">
-        {{userService.user?.points}}
+        {{user.points}}
       </div>
     </a>
   </div>
-  <div class="nav-links-wrapper">
+  <div class="nav-links-wrapper" *ngIf="user">
     <a [routerLink]="['/home']" (click)="clickedLink()">
       <div class="nav-link">
         <div class="nav-link-picture">
@@ -28,35 +28,33 @@
     </a>
     <a [routerLink]="['/profile']" (click)="clickedLink()">
       <div class="nav-link">
-          <div class="nav-link-picture">
-              <img class="nav-link-picture-img" src="./assets/images/icon-profile.svg">
-            </div>
-            PROFILE
+        <div class="nav-link-picture">
+          <img class="nav-link-picture-img" src="./assets/images/icon-profile.svg">
+        </div>
+        PROFILE
       </div>
     </a>
     <a [routerLink]="['/articles']" (click)="clickedLink()">
       <div class="nav-link">
-          <div class="nav-link-picture">
-            <img class="nav-link-picture-img" src="./assets/images/icon-all.svg">
-          </div>
+        <div class="nav-link-picture">
+          <img class="nav-link-picture-img" src="./assets/images/icon-all.svg">
+        </div>
         ALL QUESTIONS
       </div> 
     </a>
     <a [routerLink]="['/leaderboard']" (click)="clickedLink()">
       <div class="nav-link">
-          <div class="nav-link-picture">
-            <img class="nav-link-picture-img" src="./assets/images/icon-leaderboard4.svg">
-          </div>
+        <div class="nav-link-picture">
+          <img class="nav-link-picture-img" src="./assets/images/icon-leaderboard4.svg">
+        </div>
         LEADERBOARD
       </div> 
     </a>
-    <a [routerLink]="['/login']" (click)="clickedLink()">
-      <div class="nav-link">
-          <div class="nav-link-picture">
-              <img class="nav-link-picture-img" src="./assets/images/icon-logout.svg">
-            </div>
-        Log out
-      </div> 
-    </a>
+    <div class="nav-link logout" (click)="logout()">
+      <div class="nav-link-picture">
+        <img class="nav-link-picture-img" src="./assets/images/icon-logout.svg">
+      </div>
+      Log out
+    </div> 
   </div>
 </div>

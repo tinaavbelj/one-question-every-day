@@ -35,32 +35,43 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private articleService: ArticleService, private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.me().subscribe(user => {
+      this.user = user
+    })
     let id = this.route.snapshot.params.id
     this.currentId = id;
-
     this.user = this.userService.user
 
     this.articleService.getArticles().subscribe(articles => {
       this.article = articles[articles.length - 1]
       this.articleService.currentArticle = this.article
     })
-
-    this.articleService.getArticleToday(id).subscribe(article => {
+    
+    this.articleService.getArticleToday().subscribe(article => {
       this.articleService.currentArticle = article
       this.article = article
     })
+    
 
     this.redirectIfAlreadyAnswered()
   }
 
   redirectIfAlreadyAnswered() {
     console.log('last answer user')
-    console.log(this.userService.user.lastAnswer)
     console.log('date now')
-    console.log(Date.now())
-    if (this.userService.user.lastAnswer == Date.now()) {
+    const today = new Date()
+    const dbDate = new Date(this.userService.user.lastAnswer)
+    console.log(today)
+    console.log(dbDate)
+    if (this.isSameDate(today, dbDate)) {
       this.router.navigate(['profile'])
     }
+  }
+
+  isSameDate(date1, date2) {
+    console.log(date1)
+    console.log(date2)
+    return date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()
   }
 
   selectAnswer(answer) {

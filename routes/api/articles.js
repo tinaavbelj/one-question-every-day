@@ -30,6 +30,24 @@ router.get('/:id', async ((req, res) => {
     }
 }))
 
+router.get('/today', async ((req, res) => {
+    try {
+        const articles = await (Article.find({}, '-__v'))
+        
+        const today = new Date()
+        const filteredArticles = articles.filter(article => {
+            return isSameDate(article.date, today)
+        })
+        var todaysArticle = {}
+        if (filteredArticles.length > 0) {
+            todaysArticle = filteredArticles[0]
+        }
+        res.status(200).send(todaysArticle)    
+    } catch (error) {
+        res.sendStatus(500)
+    }
+}))
+
 router.get('/pdf/:filename', (req, res) => {
     const name = req.params.filename
 

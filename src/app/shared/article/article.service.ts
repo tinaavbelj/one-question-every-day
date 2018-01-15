@@ -38,8 +38,8 @@ export class ArticleService {
         return this._http.get(this._articlesUrl + '/' + id, this.getRequestOptions()).map(res => res.json())
     }
 
-    getArticleToday(date): Observable<any> {
-        return this._http.get(this._articlesUrl + '/' + date, this.getRequestOptions()).map(res => res.json())
+    getArticleToday(): Observable<any> {
+        return this._http.get(this._articlesUrl + '/today', this.getRequestOptions()).map(res => res.json())
     }
 
     updateArticle(articleData, pdfFile, id): Observable<string> {

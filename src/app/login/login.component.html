@@ -16,8 +16,15 @@
             </div>
             <input class="input" type="password" [(ngModel)]="loginData.password">
         </div>
+        <div class="register">
+            <div class="register-text">
+                Don't have an account?
+            </div>
+            <div class="register-link" (click)="register()">
+                Register.
+            </div>
+        </div>
         <div class="button-wrapper">
-            <button class="button button-register" (click)="register()">Register</button>
             <button class="button" (click)="login()">Login</button>
         </div>
     </div>

@@ -28,6 +28,14 @@
             </div>
             <input class="input" [(ngModel)]="passwordConfirmation" type="password">
         </div>
+        <div class="login">
+            <div class="login-text">
+                Already have an account?
+            </div>
+            <div class="login-link" [routerLink]="['/login']">
+                Log in.
+            </div>
+        </div>
         <div class="button-wrapper">
             <button class="button" (click)="register()">Register</button>
         </div>

@@ -36,6 +36,21 @@
             }
         }
 
+        .register {
+            display: flex;
+            justify-content: center;
+
+            .register-text {
+                margin-right: 5px;
+                color: $light-gray;
+            }
+
+            .register-link {
+                cursor: pointer;
+                color: $red;
+            }
+        }
+
         .button-wrapper {
             margin-top: 50px;
             text-align: center;

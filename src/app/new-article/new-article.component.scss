@@ -29,6 +29,10 @@
             .input {
                 background-color: $light-gray;
                 color: $very-dark-gray;
+
+                &.date {
+                    width: 300px;
+                }
             }
 
             .textarea {

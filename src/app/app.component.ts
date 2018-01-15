@@ -19,7 +19,9 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.user = this.userService.user
+    this.userService.me().subscribe( res => {
+      this.user = res
+    })
   }
 
   toggleNavigation() {

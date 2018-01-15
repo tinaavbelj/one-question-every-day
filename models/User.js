@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     admin: Boolean,
     points: Number,
-    answeredToday: Boolean,
-    lastAnswer: Boolean
+    lastAnswer: Date
 })
 
 userSchema.pre('save', function(next) {

@@ -41,6 +41,12 @@
           <option *ngFor="let c of [1,2,3,4]" [ngValue]="c" [selected]="c === article.correctAnswer"> {{c}} </option>
         </select>
       </div>
+      <div class="input-wrapper date">
+        <div class="input-label">
+          Date
+        </div>
+        <input class="input date" type="date" [(ngModel)]="articleData.date">
+      </div>
       <div class="input-wrapper">
         <div class="input-label">
           URL

@@ -32,8 +32,23 @@
         }
 
         .button-wrapper {
-            margin-top: 50px;
+            margin: 50px 0;
             text-align: center;
+        }
+
+        .login {
+            display: flex;
+            justify-content: center;
+
+            .login-text {
+                margin-right: 5px;
+                color: $light-gray;
+            }
+
+            .login-link {
+                cursor: pointer;
+                color: $red;
+            }
         }
     }
 }

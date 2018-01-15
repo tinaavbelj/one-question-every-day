@@ -44,6 +44,23 @@ export class HomeComponent implements OnInit {
       this.article = articles[articles.length - 1]
       this.articleService.currentArticle = this.article
     })
+
+    this.articleService.getArticleToday(id).subscribe(article => {
+      this.articleService.currentArticle = article
+      this.article = article
+    })
+
+    this.redirectIfAlreadyAnswered()
+  }
+
+  redirectIfAlreadyAnswered() {
+    console.log('last answer user')
+    console.log(this.userService.user.lastAnswer)
+    console.log('date now')
+    console.log(Date.now())
+    if (this.userService.user.lastAnswer == Date.now()) {
+      this.router.navigate(['profile'])
+    }
   }
 
   selectAnswer(answer) {
@@ -91,6 +108,7 @@ export class HomeComponent implements OnInit {
     else {
       this.userService.correctLastAnswer = false
     }
+    this.updateLastAnswerDate()
     this.router.navigate(['result'])
   }
 
@@ -107,5 +125,13 @@ export class HomeComponent implements OnInit {
       console.log(message)
     })
   }
-  
+
+  updateLastAnswerDate() {
+    this.user['lastAnswer'] = Date.now()
+    console.log('answer')
+    console.log(this.user['lastAnswer'])
+    this.userService.updateUser(this.user, this.user._id).subscribe(message => {
+      console.log(message)
+    })
+  }
 }

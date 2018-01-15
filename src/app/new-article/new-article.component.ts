@@ -19,7 +19,8 @@ export class NewArticleComponent implements OnInit {
     answer4: '',
     correctAnswer: '',
     url: '',
-    articleText: ''
+    articleText: '',
+    date: ''
   }
   pdfFile = null
   message
@@ -27,7 +28,7 @@ export class NewArticleComponent implements OnInit {
   constructor(private router: Router, private articleService: ArticleService) { }
 
   ngOnInit() {
-
+    
   }
 
   createArticle() {

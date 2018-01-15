@@ -90,7 +90,7 @@ router.delete('/:id', verifyAdmin, async ((req, res) => {
     }
 }))
 
-function saveFile () {
+function saveFile (pdfFile) {
     const tmpFilename = path.join(__dirname, '../../', pdfFile.path)
     const filename = path.join(__dirname, '../../pdfs/', pdfFile.originalname)
     fs.renameSync(tmpFilename, filename)

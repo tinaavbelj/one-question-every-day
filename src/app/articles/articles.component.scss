@@ -47,27 +47,13 @@
         background-color: $dark-gray;
 
         .article-text {
-            padding-bottom: 10px;
             font-size: 25px;
             color: $red;
         }
 
-        .article-data-wrapper {
-            display: flex;
-            color: $light-gray;
-
-            .article-date {
-
-            }
-
-            .article-category {
-
-            }
-        }
-
         .article-admin-options{
+            margin: 10px 0;
             display: flex;
-
             font-size: 12px;
             text-transform: uppercase;
 

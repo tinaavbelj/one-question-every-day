@@ -17,11 +17,6 @@
       <div class="article-text">
         {{article.question}}
       </div>
-      <div class="article-data-wrapper">
-        <div class="article-date">
-          {{article.date}}
-        </div>
-      </div>
     </a>
     <div class="article-admin-options" *ngIf="user.admin">
         <a [routerLink]="['/edit-article', article._id]">

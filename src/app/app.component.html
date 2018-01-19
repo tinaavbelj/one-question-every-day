@@ -4,20 +4,20 @@
     <app-navigation [navigation]="navigation" (navigationEvent)="receiveClickedLink($event)"></app-navigation>
   </div>
   <div class="nav-mobile">
-    <div class="nav-mobile-element icon" *ngIf="userService.user">
+    <div class="nav-mobile-element icon" *ngIf="user">
       <img class="nav-icon" src="./assets/images/menu2.svg" (click)="toggleNavigation()">
     </div>
     <div class="nav-mobile-element logo">
       <a [routerLink]="['/home']" class="nav-mobile-logo-a" (click)="this.navigation = false"><img class="nav-mobile-logo" src="./assets/images/logo4.svg"></a>
     </div>    
-    <div class="nav-mobile-element profile" *ngIf="userService.user">
+    <div class="nav-mobile-element profile" *ngIf="user">
       <a [routerLink]="['/profile']">
         <div class="nav-mobile-profile">
           <div class="nav-mobile-profile-username">
-            {{userService.user.username}}
+            {{user.username}}
           </div>
           <div class="nav-mobile-profile-points">
-            {{userService.user.points}}
+            {{user.points}}
           </div>
         </div>
       </a>

@@ -30,7 +30,7 @@ export class ArticleComponent implements OnInit {
       this.article = article
 
       if (article.pdf) {
-        this.pdfUrl = environment.apiUrl + '/api/articles/pdf/' + article.pdf
+        this.pdfUrl = environment.apiUrl + '/api/articles/pdf/' + article.pdf + '?token=' + localStorage.getItem('token')
       }
     })
   }

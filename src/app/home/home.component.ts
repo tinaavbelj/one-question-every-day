@@ -37,40 +37,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userService.me().subscribe(user => {
       this.user = user
+      this.redirectIfAlreadyAnswered()
     })
     let id = this.route.snapshot.params.id
     this.currentId = id;
-    this.user = this.userService.user
 
-    this.articleService.getArticles().subscribe(articles => {
-      this.article = articles[articles.length - 1]
-      this.articleService.currentArticle = this.article
-    })
-    
     this.articleService.getArticleToday().subscribe(article => {
       this.articleService.currentArticle = article
       this.article = article
     })
-    
-
-    this.redirectIfAlreadyAnswered()
   }
 
   redirectIfAlreadyAnswered() {
-    console.log('last answer user')
-    console.log('date now')
     const today = new Date()
-    const dbDate = new Date(this.userService.user.lastAnswer)
-    console.log(today)
-    console.log(dbDate)
+    const dbDate = new Date(this.user.lastAnswer)
     if (this.isSameDate(today, dbDate)) {
-      this.router.navigate(['profile'])
+      this.router.navigate(['/profile'])
     }
   }
 
   isSameDate(date1, date2) {
-    console.log(date1)
-    console.log(date2)
     return date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()
   }
 
@@ -112,37 +98,25 @@ export class HomeComponent implements OnInit {
       return
     }
     if(this.correct){
-      this.updatePoints(10);
+      this.user['points'] += 10
       //this.router.navigate(['article', {id: this.article.id, p2: this.correct }]); 
       this.userService.correctLastAnswer = true
     }
     else {
       this.userService.correctLastAnswer = false
     }
-    this.updateLastAnswerDate()
-    this.router.navigate(['result'])
+    this.user['lastAnswer'] = new Date()
+    this.updateUser()
   }
 
   checkAnswer(i) {
-    if(this.article.correctAnswer == i) {
-      return true
-    }
-    return false
+    return this.article.correctAnswer == i
   }
-  
-  updatePoints(points) {
-    this.user['points'] += points
+
+  updateUser() {
     this.userService.updateUser(this.user, this.user._id).subscribe(message => {
-      console.log(message)
+      this.router.navigate(['/result'])
     })
   }
 
-  updateLastAnswerDate() {
-    this.user['lastAnswer'] = Date.now()
-    console.log('answer')
-    console.log(this.user['lastAnswer'])
-    this.userService.updateUser(this.user, this.user._id).subscribe(message => {
-      console.log(message)
-    })
-  }
 }

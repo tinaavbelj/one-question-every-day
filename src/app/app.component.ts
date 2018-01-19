@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs/Subscription'
 
-import { UserService } from "./shared/user/user.service";
-import { User } from "./shared/user/user";
+import { UserService } from "./shared/user/user.service"
+import { User } from "./shared/user/user"
   
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { User } from "./shared/user/user";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
+  private onUserChangedSubscription: Subscription;
   title = 'app'
   user: User
   isLoggingIn = true
@@ -19,8 +21,16 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.me().subscribe( res => {
-      this.user = res
+    this.userService.isAuthenticated().subscribe(success => {
+      if (success) {
+        this.userService.me().subscribe(user => {
+          this.user = user
+        })
+      }
+    })
+
+    this.onUserChangedSubscription = this.userService.receiveUserChanged().subscribe(user => {
+      this.user = user
     })
   }
 

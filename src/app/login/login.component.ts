@@ -19,14 +19,32 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
+  errors = []
   
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    
   }
 
   login() {
-    this.userService.loginUser(this.loginData)
+    this.errors = []
+
+    if (this.loginData.email.length < 6) {
+      this.errors.push('Email has to be at least 6 characters long')
+    }
+
+    if (this.loginData.password.length < 6) {
+      this.errors.push('Password has to be at least 6 characters long')
+    }
+
+    if (this.errors.length === 0) {
+      this.userService.loginUser(this.loginData).subscribe(res => {
+        if (res.status === 401 || res.status === 404) {
+            this.errors.push(res.message)
+        }
+      })
+    }
   }
 
   register() {

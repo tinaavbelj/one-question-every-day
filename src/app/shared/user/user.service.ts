@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
-import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { Router } from '@angular/router'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { environment } from '../../../environments/environment'
 import { Observable } from 'rxjs/Observable'
@@ -24,22 +24,28 @@ export class UserService {
 
   constructor(private _http: Http, private _httpClient: HttpClient, private router: Router) { }
 
-  registerUser(registerData) {
-    this._http.post(this._registerUrl, registerData).subscribe(res => {
-      this.router.navigate(['/login'])
-    })
+  registerUser(registerData): Observable<any> {
+    return this._http.post(this._registerUrl, registerData)
+      .map(res => {
+        this.router.navigate(['/login'])
+        return { status: res.status }
+      })
+      .catch(error => Observable.of({ status: error.status, message: error._body }))
   }
 
-  loginUser(loginData) {
-    this._httpClient.post<any>(this._loginUrl, loginData).subscribe(res => {
-      localStorage.setItem('token', res.token)
-      this.me().subscribe((user: any) => {
-        this.user = user
-        this.userId = user._id
-        this.router.navigate(['/home'])
-        this.sendUserChanged(user)
+  loginUser(loginData): Observable<any> {
+    return this._httpClient.post<any>(this._loginUrl, loginData)
+      .map(res => {
+        localStorage.setItem('token', res.token)
+        this.me().subscribe((user: any) => {
+          this.user = user
+          this.userId = user._id
+          this.router.navigate(['/home'])
+          this.sendUserChanged(user)
+        })
+        return { status: res.status }
       })
-    })
+      .catch((error: HttpErrorResponse) => Observable.of({ status: error.status, message: error.error }))
   }
 
   logoutUser() {
@@ -53,12 +59,13 @@ export class UserService {
   }
 
   me() {
-    return this._http.get(this._usersUrl + '/me', this.getRequestOptions()).map(res => {
-      const user = res.json()
-      this.user = user
-      this.sendUserChanged(this.user)
-      return user
-    })
+    return this._http.get(this._usersUrl + '/me', this.getRequestOptions())
+      .map(res => {
+        const user = res.json()
+        this.user = user
+        this.sendUserChanged(this.user)
+        return user
+      })
   }
 
   getUsers(): Observable<any> {

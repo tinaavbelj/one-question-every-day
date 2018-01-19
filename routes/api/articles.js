@@ -15,7 +15,19 @@ router.use(verifyToken);
 router.get('/', async ((req, res) => {
     try {
         const articles = await (Article.find({}, '-__v'))
-        res.send(articles)     
+        res.status(200).send(articles)     
+    } catch (error) {
+        res.sendStatus(500)
+    }
+}))
+
+router.get('/today', async ((req, res) => {
+    try {
+        const articles = await (Article.find({}, '-__v'))
+        const today = new Date()
+        const filteredArticles = articles.filter(article => isSameDate(article.date, today))
+        var todaysArticle = filteredArticles.length > 0 ? filteredArticles[0] : {}
+        res.status(200).send(todaysArticle)    
     } catch (error) {
         res.sendStatus(500)
     }
@@ -27,24 +39,6 @@ router.get('/:id', async ((req, res) => {
         res.status(200).send(article)  
     } catch (error) {
         res.sendStatus(404)
-    }
-}))
-
-router.get('/today', async ((req, res) => {
-    try {
-        const articles = await (Article.find({}, '-__v'))
-        
-        const today = new Date()
-        const filteredArticles = articles.filter(article => {
-            return isSameDate(article.date, today)
-        })
-        var todaysArticle = {}
-        if (filteredArticles.length > 0) {
-            todaysArticle = filteredArticles[0]
-        }
-        res.status(200).send(todaysArticle)    
-    } catch (error) {
-        res.sendStatus(500)
     }
 }))
 
@@ -76,7 +70,7 @@ router.post('/', [ verifyAdmin, upload.single('pdf') ], async ((req, res) => {
     
     try {
         await (article.save())
-        res.sendStatus(201).send(article)
+        res.status(201).send(article)
     } catch (error) {
         res.sendStatus(500)
     }
@@ -93,7 +87,7 @@ router.put('/:id', [ verifyAdmin, upload.single('pdf') ], async ((req, res) => {
 
     try {
         await (Article.findOneAndUpdate({ _id: req.params.id }, { $set: articleData }, {}))
-        res.sendStatus(204).send('Article successfully updated')
+        res.status(204).send('Article successfully updated')
     } catch (error) {
         res.sendStatus(404)
     }
@@ -102,11 +96,15 @@ router.put('/:id', [ verifyAdmin, upload.single('pdf') ], async ((req, res) => {
 router.delete('/:id', verifyAdmin, async ((req, res) => {
     try {
         await (Article.remove({ _id: req.params.id }))
-        res.sendStatus(204).send('Article successfully deleted')
+        res.status(204).send('Article successfully deleted')
     } catch (error) {
         res.sendStatus(404)
     }
 }))
+
+function isSameDate (date1, date2) {
+    return date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()
+}
 
 function saveFile (pdfFile) {
     const tmpFilename = path.join(__dirname, '../../', pdfFile.path)

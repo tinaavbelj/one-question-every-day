@@ -47,9 +47,11 @@ export class RegisterComponent implements OnInit {
     }
 
     if (this.errors.length === 0) {
-      this.registerData['admin'] = false
-      this.registerData['points'] = 0
-      this.userService.registerUser(this.registerData)
+      this.userService.registerUser(this.registerData).subscribe(res => {
+        if (res.status === 400 || res.status === 500) {
+            this.errors.push(res.message)
+        }
+      })
     }
   }
 

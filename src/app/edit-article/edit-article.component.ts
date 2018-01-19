@@ -22,7 +22,8 @@ export class EditArticleComponent implements OnInit {
     correctAnswer: 1,
     url: '',
     pdf: '',
-    articleText: ''
+    articleText: '',
+    date: ''
   }
   pdfFile = null
   pdfFileRemoved = false
@@ -34,6 +35,7 @@ export class EditArticleComponent implements OnInit {
     let id = this.route.snapshot.params.id
     this.currentId = id;
     this.articleService.getArticle(this.currentId).subscribe(article => {
+      article.date = this.formatDate(article.date)
       this.article = article
     })
   }
@@ -43,6 +45,12 @@ export class EditArticleComponent implements OnInit {
       this.message = message
       this.router.navigate(['/articles'])
     })
+  }
+
+  formatDate(date) {
+    const newDate = new Date(date)
+    const datePipe = new DatePipe('en-US')
+    return datePipe.transform(new Date, 'yyyy-MM-dd')
   }
 
   handlePdf(file) {

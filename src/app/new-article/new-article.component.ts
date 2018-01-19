@@ -32,7 +32,6 @@ export class NewArticleComponent implements OnInit {
   }
 
   createArticle() {
-    this.articleData['new'] = true
     this.articleService.createArticle(this.articleData, this.pdfFile).subscribe(message => {
       this.message = message
       this.router.navigate(['/articles'])

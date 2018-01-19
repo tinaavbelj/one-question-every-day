@@ -25,7 +25,10 @@
             </div>
         </div>
         <div class="button-wrapper">
-            <button class="button" (click)="login()">Login</button>
+            <button id="login-button" class="button" (click)="login()">Login</button>
+        </div>
+        <div class="error-wrapper">
+            <div class="error" *ngFor="let error of errors">{{error}}</div>
         </div>
     </div>
     <!--<app-landscape></app-landscape>-->

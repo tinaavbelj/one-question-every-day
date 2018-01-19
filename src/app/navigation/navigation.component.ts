@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core'
+import { Subscription } from 'rxjs/Subscription'
 
-import { UserService } from '../shared/user/user.service';
+import { UserService } from '../shared/user/user.service'
 
 @Component({
   selector: 'app-navigation',
@@ -22,10 +22,8 @@ export class NavigationComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.me().subscribe(user => {
-      this.user = user
-    })
-
+    this.userService.user
+    
     this.onUserChangedSubscription = this.userService.receiveUserChanged().subscribe(user => {
       this.user = user
     })

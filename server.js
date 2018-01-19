@@ -27,6 +27,11 @@ app.use('/api/auth', auth)
 app.use('/api/users', users)
 app.use('/api/articles', articles)
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'dist') })
+})
+
 mongoose.connect(process.env.MONGO_URL, (err) => {
     if (!err) {
         console.log('Connected to mongo database...')

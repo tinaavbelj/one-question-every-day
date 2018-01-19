@@ -7,6 +7,11 @@
     background-color: $bg-dark-gray;
     background-size: 400px 400px;
     overflow-y: scroll;
+
+    @include breakpoint-768 {
+        height: 100%;
+        overflow-y: auto;
+    }
     
     .svg-wrapper{
         z-index: 10;

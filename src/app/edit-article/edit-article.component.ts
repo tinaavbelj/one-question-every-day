@@ -50,7 +50,7 @@ export class EditArticleComponent implements OnInit {
   formatDate(date) {
     const newDate = new Date(date)
     const datePipe = new DatePipe('en-US')
-    return datePipe.transform(new Date, 'yyyy-MM-dd')
+    return datePipe.transform(newDate, 'yyyy-MM-dd')
   }
 
   handlePdf(file) {

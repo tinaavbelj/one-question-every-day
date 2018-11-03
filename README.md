@@ -26,3 +26,7 @@ Run `ng build --aot -prod` or `npm run build` to build the project in production
 ## Deployment
 
 Log into your Heroku account using `heroku login` command. Then run `git push heroku master` to push all so far unpushed commits to the heroku server and wait for the new version of the production application to be built.
+
+## URL
+
+https://one-question-every-day.herokuapp.com/

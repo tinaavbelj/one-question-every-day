@@ -32,5 +32,7 @@ Log into your Heroku account using `heroku login` command. Then run `git push he
 https://one-question-every-day.herokuapp.com/
 
 demo account:
+
 e-mail: test@test.com
+
 password: test123

@@ -36,3 +36,7 @@ demo account:
 e-mail: test@test.com
 
 password: test123
+
+## Preview
+
+![One Question Every Day](one-question-every-day.gif)
